@@ -1,0 +1,18 @@
+﻿{
+    "iisSettings": {
+        "windowsAuthentication": false,
+        "anonymousAuthentication": true,
+        "iis": {
+            "applicationUrl": "http://www.azuretest.net/api",
+            "sslPort": 443
+        }
+    },
+    "profiles": {
+        "AzureTest.Api": {
+            "commandName": "IIS",
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        }
+    }
+}

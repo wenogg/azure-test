@@ -1,0 +1,32 @@
+﻿{
+	"iisSettings": {
+		"windowsAuthentication": false,
+		"anonymousAuthentication": true,
+		"iisExpress": {
+			"applicationUrl": "http://localhost:33087",
+			"sslPort": 44349
+		},
+		"iis": {
+			"applicationUrl": "http://www.azuretest.net/",
+			"sslPort": 443
+		}
+	},
+	"profiles": {
+		"AzureTest.Web": {
+			"commandName": "IIS",
+			"launchBrowser": true,
+			"applicationUrl": "http://www.azuretest.net/",
+			"environmentVariables": {
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			}
+		},
+		"IIS Express": {
+			"commandName": "IISExpress",
+			"launchBrowser": true,
+			"environmentVariables": {
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			}
+		}
+
+	}
+}

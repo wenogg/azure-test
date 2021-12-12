@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AzureTest.Api</name>
+    </assembly>
+    <members>
+        <member name="T:AzureTest.Api.Controllers.UserController">
+            <summary>
+            Collection of users
+            </summary>
+        </member>
+        <member name="M:AzureTest.Api.Controllers.UserController.#ctor(AzureTest.Infrastructure.SandboxDBContext)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:AzureTest.Api.Controllers.UserController.Get(System.String)">
+            <summary>
+            Returns a collection of users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AzureTest.Api.Controllers.UserController.Get(System.Int32)">
+            <summary>
+            Returns a single user
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
