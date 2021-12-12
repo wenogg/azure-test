@@ -1,4 +1,5 @@
 ﻿using AzureTest.Core.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal;
 using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
@@ -7,7 +8,9 @@ using System;
 using System.Linq;
 
 namespace AzureTest.Infrastructure {
-	public class SandboxDBContext  : DbContext {
+
+
+	public class SandboxDBContext  : IdentityDbContext {
 
         public SandboxDBContext(DbContextOptions<SandboxDBContext> options) : base(ChangeOptionsType<SandboxDBContext>(options)) {
             

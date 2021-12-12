@@ -25,8 +25,7 @@ namespace AzureTest.Api {
 
 
 			config
-				.AddEnvironmentVariables()
-				.AddUserSecrets<Startup>(false);
+				.AddEnvironmentVariables();
 
 			var root = config.Build();
 			var generalSettingsPath = root.GetValue<string>("ConnectionStrings:DefaultConnection");
