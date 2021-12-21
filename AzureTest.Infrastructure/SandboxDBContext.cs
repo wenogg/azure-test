@@ -10,13 +10,12 @@ using System.Linq;
 namespace AzureTest.Infrastructure {
 
 
-	public class SandboxDBContext  : IdentityDbContext {
+	public class SandboxDBContext  : IdentityDbContext<ApplicationUser, ApplicationRole, string> {
 
         public SandboxDBContext(DbContextOptions<SandboxDBContext> options) : base(ChangeOptionsType<SandboxDBContext>(options)) {
             
         } 
 
-        public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             base.OnConfiguring(optionsBuilder);
@@ -30,13 +29,17 @@ namespace AzureTest.Infrastructure {
 
             modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
-            modelBuilder.Entity<User>(entity => {
-                entity.HasKey(e => e.Id);
+            modelBuilder.Entity<ApplicationUser>(entity => {
+                
+                //entity.ToTable("Users");
 
-                entity.ToTable("Users");
+                entity.Property(e => e.FirstName)
+                    .HasColumnName("FirstName")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Name)
-                    .HasColumnName("Name")
+                entity.Property(e => e.LastName)
+                    .HasColumnName("LastName")
                     .HasMaxLength(200)
                     .IsUnicode(false);
             });

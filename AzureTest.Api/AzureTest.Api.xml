@@ -9,7 +9,7 @@
             Collection of users
             </summary>
         </member>
-        <member name="M:AzureTest.Api.Controllers.UserController.#ctor(AzureTest.Infrastructure.SandboxDBContext)">
+        <member name="M:AzureTest.Api.Controllers.UserController.#ctor(AzureTest.Infrastructure.SandboxDBContext,AutoMapper.IMapper)">
             <summary>
             Constructor
             </summary>
@@ -21,12 +21,31 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AzureTest.Api.Controllers.UserController.Get(System.Int32)">
+        <member name="M:AzureTest.Api.Controllers.UserController.GetOne(System.String)">
             <summary>
             Returns a single user
             </summary>
             <param name="id"></param>
             <returns></returns>
+        </member>
+        <member name="T:AzureTest.Api.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AzureTest.Api.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AzureTest.Api.Program.ConfigConfiguration(Microsoft.AspNetCore.Hosting.WebHostBuilderContext,Microsoft.Extensions.Configuration.IConfigurationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="ctx"></param>
+            <param name="config"></param>
         </member>
     </members>
 </doc>

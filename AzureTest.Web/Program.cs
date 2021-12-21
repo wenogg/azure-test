@@ -1,3 +1,4 @@
+using AzureTest.Core.Entities;
 using AzureTest.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -9,13 +10,28 @@ builder.WebHost
 	.UseIISIntegration();
 
 // Add services to the container.
+
+// Data Contexts
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<SandboxDBContext>(options =>
-	options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<SandboxDBContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+
+// Authentication
+builder.Services
+	.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
 	.AddEntityFrameworkStores<SandboxDBContext>();
+
+builder.Services.AddAuthentication(options => {
+	options.DefaultScheme = IdentityConstants.ApplicationScheme;	
+})
+.AddCookie()
+.AddGoogle(options => {
+	options.SignInScheme = IdentityConstants.ExternalScheme;
+	options.ClientId = builder.Configuration["Google:ClientId"];
+	options.ClientSecret = builder.Configuration["Google:ClientSecret"];
+
+});
 
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 

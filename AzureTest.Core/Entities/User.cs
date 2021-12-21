@@ -1,7 +1,9 @@
-﻿namespace AzureTest.Core.Entities {
-	public class User {
-		public int Id { get; set; }
+﻿using Microsoft.AspNetCore.Identity;
 
-		public string Name { get; set; }
+namespace AzureTest.Core.Entities {
+	public class ApplicationUser : IdentityUser {
+		public string FirstName { get; set; }
+
+		public string LastName { get; set; }
 	}
 }

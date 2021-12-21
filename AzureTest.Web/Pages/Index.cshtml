@@ -7,4 +7,32 @@
 <div class="text-center">
     <h1 class="display-4">Welcome NEW ttt</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+
+</div>
+
+<div>
+    @if (User.Identity.IsAuthenticated) {
+        <h3>Logged in: @User.Identity.Name!</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Claim</th>
+                    <th scope="col">Value</th>
+                </tr>
+                
+            </thead>
+            <tbody>
+                @foreach (var claim in User.Claims)
+                {
+                    <tr>
+                        <td>@claim.Type</td>
+                        <td>@claim.Value</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+
 </div>

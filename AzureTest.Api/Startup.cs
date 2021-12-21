@@ -1,3 +1,4 @@
+using AzureTest.Core.Mapping;
 using AzureTest.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +26,8 @@ namespace AzureTest.Api {
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services) {
+			services.AddAutoMapper(typeof(AutoMapperProfile));
+
 			services.AddControllersWithViews()
 				.AddMvcOptions(options => {
 					options.Filters.Add(new RequireHttpsAttribute());

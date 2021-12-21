@@ -1,4 +1,6 @@
-﻿using AzureTest.Core.Entities;
+﻿using AutoMapper;
+using AzureTest.Core.Entities;
+using AzureTest.Core.ViewModels;
 using AzureTest.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,14 +16,16 @@ namespace AzureTest.Api.Controllers {
 	[Route("users")]
 	public class UserController : Controller {
 		private readonly SandboxDBContext _context;
-		private List<User> _users = new List<User>();
+		private readonly IMapper _mapper;
+		private List<ApplicationUser> _users = new List<ApplicationUser>();
 		
 		/// <summary>
 		/// Constructor
 		/// </summary>
 		/// <param name="context"></param>
-		public UserController(SandboxDBContext context) {
+		public UserController(SandboxDBContext context, IMapper mapper) {
 			_context = context;
+			_mapper = mapper;
 		}
 
 		/// <summary>
@@ -29,10 +33,11 @@ namespace AzureTest.Api.Controllers {
 		/// </summary>
 		/// <returns></returns>
 		[HttpGet("")]
-		[ProducesResponseType(typeof(List<User>), StatusCodes.Status200OK)]
-		public async Task<ActionResult<List<User>>> Get(string name) {
-			var users = await _context.Users.Where(s => string.IsNullOrEmpty(name) || s.Name.ToLower().Contains(name.ToLower())).ToListAsync();
-			return Ok(users);
+		[ProducesResponseType(typeof(List<UserViewModel>), StatusCodes.Status200OK)]
+		public async Task<ActionResult<List<ApplicationUser>>> Get(string name) {
+			var users = await _context.Users.Where(s => string.IsNullOrEmpty(name) || s.UserName.ToLower().Contains(name.ToLower())).ToListAsync();
+			var items = _mapper.Map<List<ApplicationUser>, List<UserViewModel>>(users);
+			return Ok(items);
 		}
 
 		/// <summary>
@@ -40,16 +45,16 @@ namespace AzureTest.Api.Controllers {
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		[HttpGet("{id:int}")]
-		[ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
-		public async Task<ActionResult<User>> Get(int id) {
+		[HttpGet("{id}")]
+		[ProducesResponseType(typeof(UserViewModel), StatusCodes.Status200OK)]
+		public async Task<ActionResult<ApplicationUser>> GetOne(string id) {
 			var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
 
 			if (user == null) {
 				return NotFound();
 			}
-
-			return Ok(user);
+			var item = _mapper.Map<UserViewModel>(user);
+			return Ok(item);
 		}
 
 	}
