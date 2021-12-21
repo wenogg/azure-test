@@ -1,7 +1,10 @@
 using AzureTest.Core.Entities;
+using AzureTest.Core.Idenity;
 using AzureTest.Infrastructure;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +22,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 // Authentication
 builder.Services
-	.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+	.AddIdentity<ApplicationUser, ApplicationRole>(options => options.SignIn.RequireConfirmedAccount = true)
+	.AddDefaultUI()
+	.AddDefaultTokenProviders()
 	.AddEntityFrameworkStores<SandboxDBContext>();
 
 builder.Services.AddAuthentication(options => {
@@ -32,6 +37,8 @@ builder.Services.AddAuthentication(options => {
 	options.ClientSecret = builder.Configuration["Google:ClientSecret"];
 
 });
+
+builder.Services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
 
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
